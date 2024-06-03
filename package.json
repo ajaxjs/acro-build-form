@@ -1,17 +1,24 @@
 {
   "name": "acro-build-form",
   "version": "0.1.0",
-  "private": true,
+  "description": "arco.design的JSON创建表单组件，Vue3版本",
+  "private": false,
+  "main": "lib/acro-build-form.umd.min.js",
+  "author": "afenghy@qq.com",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name acro-build-form --dest lib packages/index.js"
   },
   "dependencies": {
     "core-js": "^3.8.3",
     "vue": "^3.2.13"
   },
+  "keywords":["arco","arco.design","build-form"],
   "devDependencies": {
+    "@arco-design/web-vue": "^2.55.2",
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
