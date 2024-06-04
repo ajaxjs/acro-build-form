@@ -6,7 +6,12 @@
     <!-- 表单项 -->
     <a-row v-bind="rowAttrs" class="row-field">
       <template v-for="(item, i) in fields" :key="i">
-        <BuildField v-bind="fieldAttrs(item, $attrs)" />
+        <!-- 分割线 -->
+        <template v-if="item.type == 'divider'">
+          <a-divider v-bind="item">{{ item.label }}</a-divider>
+        </template>
+        <!-- 表单字段 -->
+        <BuildField v-else-if="item.name && item.label" v-bind="fieldAttrs(item, $attrs)" />
       </template>
     </a-row>
     <!-- 表单按钮 -->
@@ -86,8 +91,9 @@ function onChange(val, attr, ev) {
 }
 // fieldAttrs
 function fieldAttrs(attr, globalAttrs) {
-  const placeholder =
-    attr.type === 'range' || !attr.label ? null : `请输入${attr.label}`;
+  // 无placeholder
+  const noph = ['range','divider'].includes(attr.type);
+  const placeholder = noph || !attr.label ? null : `请输入${attr.label}`;
   return {
     placeholder,
     ...globalAttrs,

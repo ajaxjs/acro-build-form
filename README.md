@@ -18,9 +18,9 @@ app.use(BuildForm);
 
 ```vue
 <template>
-    <div>
+    <div class="wrapper">
         {{ prms }}
-        <a-card style="max-width: 480px;margin:auto">
+        <a-card class="q-mx-md" style="max-width: 640px;margin:auto">
             <a-build-form v-model="prms" :fields="fields" :buttons="['立即提交',{label:'重置',htmlType:'reset'}]" />
         </a-card>
     </div>
@@ -115,6 +115,7 @@ const treeData = [
 const fields = [
     { name: 'username', label: '用户名', placeholder: '请输入用户名!' },
     { name: 'password', label: '密码', type: 'password' },
+    { type:'divider', label:'详细资料', orientation:'center' },
     { name: 'sex', label: '性别', type: 'radio', options: ['男', '女'] },
     { name: 'date', label: '生日', type: 'date' },
     { name: 'avatar', label: '头像', type: 'avatar' },
@@ -161,7 +162,6 @@ const fields = [
 ];
 </script>
 
-<style lang="scss" scoped></style>
 ```
 
 

@@ -102,7 +102,12 @@
       extSet = Object.assign({
         showText: true
       }, extSet)
+    }else if(type === 'password'){
+      extSet = Object.assign({
+        autocomplete: 'current-password',
+      }, extSet)
     }
+    console.log(attrsObj)
 
     return {
       ...attrsObj,
