@@ -1,13 +1,8 @@
 <template>
-  <div class="hello">
+  <div class="hello" style="max-width: 640px;margin:auto; text-align: center">
     <h1>{{ msg }}</h1>
-    <div>
-      <a-button type="primary">Button</a-button>
-    </div>
     <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
+      欢迎使用 acro-build-form 组件，可以快速构建表单，配置项详见 <a href="https://www.arco.design/vue/docs/form" target="_blank" rel="noopener">arco-design-vue</a>
     </p>
   </div>
 </template>

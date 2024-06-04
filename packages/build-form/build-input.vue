@@ -82,7 +82,7 @@
   function onChange(val, ev) {
     emit('change', val, attrsObj, ev);
   }
-
+  
   const attrs = computed(() => {
     const { options, type, data } = attrsObj;
     let extSet = {};
@@ -92,6 +92,8 @@
       // 二级JSON
       extSet.data = options;
     } else if (type === 'avatar') {
+      // 上传功能
+      // const autoUpload = 
       Object.assign(extSet, {
         limit: 1,
         type: 'upload',
@@ -107,7 +109,6 @@
         autocomplete: 'current-password',
       }, extSet)
     }
-    console.log(attrsObj)
 
     return {
       ...attrsObj,

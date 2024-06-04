@@ -1,8 +1,12 @@
 <template>
-    <div class="wrapper">
-        {{ prms }}
-        <a-card class="q-mx-md" style="max-width: 640px;margin:auto">
-            <a-build-form v-model="prms" :fields="fields" :buttons="['立即提交',{label:'重置',htmlType:'reset'}]" />
+    <div style="max-width: 640px;margin:auto">
+        <a-space>
+            <a-btn label="外部设置值1" type="outline" @click="prms.password = '123456'" />
+            <a-btn label="外部设置值2" type="outline" @click="prms.password = '123'" />
+        </a-space>
+        <div style="padding: 10px 0;">{{ prms }}</div>
+        <a-card class="q-mx-md">
+            <a-build-form v-model="prms" :fields="fields" :buttons="['立即提交', { label: '重置', onClick: onReset }]" />
         </a-card>
     </div>
 </template>
@@ -10,8 +14,9 @@
 <script setup>
 import { ref } from 'vue';
 
-const prms = ref({})
+const prms = ref({ username: 'hello' })
 
+// 地址选项演示数据
 const addressSet = [
     {
         value: 'beijing',
@@ -62,6 +67,8 @@ const addressSet = [
         ],
     },
 ];
+
+// Tree演示数据
 const treeData = [
     {
         key: 'k1',
@@ -96,7 +103,7 @@ const treeData = [
 const fields = [
     { name: 'username', label: '用户名', placeholder: '请输入用户名!' },
     { name: 'password', label: '密码', type: 'password' },
-    { type:'divider', label:'详细资料', orientation:'center' },
+    { type: 'divider', label: '详细资料', orientation: 'center' },
     { name: 'sex', label: '性别', type: 'radio', options: ['男', '女'] },
     { name: 'date', label: '生日', type: 'date' },
     { name: 'avatar', label: '头像', type: 'avatar' },
@@ -141,6 +148,10 @@ const fields = [
         options: ['Beijing', 'Shanghai', 'Chengdu', 'WuHan'],
     },
 ];
+
+function onReset() {
+    prms.value = {}
+}
 </script>
 
 <style lang="scss" scoped></style>

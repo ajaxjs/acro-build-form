@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { reactive, computed, defineProps, defineEmits, defineOptions } from 'vue';
+import { watch, reactive, computed, defineProps, defineEmits, defineOptions } from 'vue';
 import BuildField from './build-field.vue';
 import ABtn from '../btn/a-btn.vue';
 import { buildAttrs, formProps, buttonProps, rowProps } from './use-form';
@@ -43,7 +43,9 @@ const props = defineProps({
 });
 const emit = defineEmits(['update:modelValue']);
 // 表单数据
-const form = reactive(props.modelValue || {});
+let form = reactive(props.modelValue || {});
+// 监听数据
+watch(() => props.modelValue, (val) => form = val, { deep: true });
 
 // 表单属性
 const formAttrs = computed(() => {
@@ -89,10 +91,16 @@ function onChange(val, attr, ev) {
     emit('update:modelValue', form, ev);
   }
 }
+// 表单重置事件
+function onReset(ev) {
+  console.log(ev)
+  emit('update:modelValue', {}, ev);
+}
+
 // fieldAttrs
 function fieldAttrs(attr, globalAttrs) {
   // 无placeholder
-  const noph = ['range','divider'].includes(attr.type);
+  const noph = ['range', 'divider'].includes(attr.type);
   const placeholder = noph || !attr.label ? null : `请输入${attr.label}`;
   return {
     placeholder,
@@ -101,6 +109,7 @@ function fieldAttrs(attr, globalAttrs) {
     modelValue: form[attr.name],
     onInput,
     onChange,
+    onReset,
   };
 }
 </script>
