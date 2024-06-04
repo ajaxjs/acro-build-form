@@ -13,10 +13,15 @@
     "lib": "vue-cli-service build --target lib --name acro-build-form --dest lib packages/index.js"
   },
   "dependencies": {
+    "acro-build-form": "^0.1.0",
     "core-js": "^3.8.3",
     "vue": "^3.2.13"
   },
-  "keywords":["arco","arco.design","build-form"],
+  "keywords": [
+    "arco",
+    "arco.design",
+    "build-form"
+  ],
   "devDependencies": {
     "@arco-design/web-vue": "^2.55.2",
     "@babel/core": "^7.12.16",
