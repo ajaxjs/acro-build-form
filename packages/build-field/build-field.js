@@ -15,6 +15,9 @@ export default defineComponent({
     emits: ['update:modelValue'],
     setup(props, { attrs, slots, emit }) {
         const formValue = reactive(props.modelValue || {});
+        if(!Array.isArray(props.fields)){
+            console.error('fields is not array');
+        }
         
         // emitValue
         function emitValue(val, attr) {
@@ -23,8 +26,8 @@ export default defineComponent({
         }
 
         return () => {
-
-            return props.fields.map(item => {
+            const fields = props.fields || [];
+            return fields.map(item => {
 
                 // 分隔线
                 if (item.type == 'divider') {

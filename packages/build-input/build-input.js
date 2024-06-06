@@ -46,7 +46,6 @@ function buildInput(props, attrs, inputSlots, emit) {
     const { label, noPlaceholder } = props;
     // 输入事件
     function onUpdate(val) {
-        console.log(val)
         emit('update:modelValue', val, { label, ...attrs })
     }
     const inputAttrs = { label, ...attrs, 'onUpdate:modelValue': onUpdate };

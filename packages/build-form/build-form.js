@@ -30,6 +30,7 @@ export default defineComponent({
                     h(BuildField, { ...attrs, fields: props.fields, modelValue: props.modelValue }, slots),
                     slots.append ? slots.append() : null,
                     buttons,
+                    slots.default ? slots.default() : null
                 ]
             }
         }
@@ -40,7 +41,11 @@ export default defineComponent({
 
 function buildBtns(props, slots) {
     // 按扭属性
-    const { buttons, buttonSpace } = buildAttrs(props, buttonProps);
+    let { buttons, buttonSpace } = buildAttrs(props, buttonProps);
+    if(!buttons || !Array.isArray(buttons)){
+        return null;
+    }
+
     const btns = buttons.map((vo, i) => {
         let btnAttrs = typeof vo == 'string' ? { label: vo } : vo;
         if (i === 0) {
