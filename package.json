@@ -1,6 +1,6 @@
 {
   "name": "acro-build-form",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "arco.design的JSON创建表单组件，Vue3版本",
   "private": false,
   "main": "lib/acro-build-form.umd.min.js",
