@@ -1,19 +1,20 @@
 <template>
-  <HelloWorld msg="acro-build-form"/>
-  <FormDemo />
+  <div style="max-width: 750px;margin:auto">
+    <a-space direction="vertical" fill>
+      <HelloWorld msg="acro-build-form" />
+      <FormLogin />
+      <FormInline />
+      <FormDemo />
+    </a-space>
+  </div>
 </template>
 
-<script>
+<script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import FormLogin from './components/FormLogin.vue'
 import FormDemo from './components/FormDemo.vue'
+import FormInline from './components/FormInline.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld,
-    FormDemo
-  }
-}
 </script>
 
 <style>
