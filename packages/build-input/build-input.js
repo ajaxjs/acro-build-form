@@ -52,6 +52,9 @@ function buildInput(props, attrs, inputSlots, emit) {
     if(!noPlaceholder && !['range'].includes(inputType)) {
         inputAttrs.placeholder = `请输入${label}`;
     }
+    if(inputType == 'password') {
+        inputAttrs.autocomplete = 'current-password'
+    }
 
     const inputItem = h(getInputItem(inputType), inputAttrs, inputSlots);
 

@@ -142,3 +142,18 @@ export function formatOptions(options, format) {
   });
 }
 
+/**
+ * 将orgComps中的方法绑定到targetRef，返回方法Map
+ * @param {Object}  orgComps 组件对象
+ * @param {string}  targetRef 目标组件ref名称
+ * @returns 方法Map
+ */
+export function bindMethods(orgComps, targetRef) {
+  const methods = {};
+  Object.keys(orgComps.methods).forEach((key) => {
+      methods[key] = function (...args) {
+          return this.$refs[targetRef][key](...args);
+      }
+  })
+  return methods;
+}

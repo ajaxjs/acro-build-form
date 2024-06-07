@@ -2,7 +2,7 @@
 
     <a-card title="a-build-input 输入" style="margin: 10px;">
         <div style="padding: 10px;">单独使用a-build-input组件：{{ titleVal }}</div>
-        <a-form :model="{titleVal}">
+        <a-form :model="{ titleVal }">
             <a-build-input v-model="titleVal" label="标题" name="标题" />
         </a-form>
     </a-card>
@@ -30,6 +30,7 @@
                     </template>
 
                 </a-build-field>
+                <a-button html-type="submit" type="primary">提交</a-button>
             </a-row>
         </a-form>
     </a-card>
@@ -38,9 +39,14 @@
         <div style="padding: 10px;">
             <div>a-build-form组件：{{ formValue }}</div>
         </div>
-        <a-build-form v-model="formValue" :fields="formFields" :buttons="['立即登录',{label:'忘记密码'}]" />
+        <a-build-form ref="formRef" v-model="formValue" :fields="formFields" :buttons="['立即登录', { label: '忘记密码' }]" />
+
+        <a-space>
+            <a-button type="outline" @click="formRef.resetFields()">触发重置表单</a-button>
+            <a-button type="outline" @click="formRef.validate()">触发验证表单</a-button>
+        </a-space>
     </a-card>
-    
+
 </template>
 
 <script setup>
@@ -49,6 +55,7 @@ import { Button } from '@arco-design/web-vue';
 
 const prms = ref({});
 const titleVal = ref();
+const formRef = ref();
 
 const imgcode = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAA+BAMAAACcvUmpAAAAG1BMVEXz+/44Qkfb4+eVnqJPWV2stbnEzNB+h4tmcHSgo71NAAAACXBIWXMAAA7EAAAOxAGVKw4bAAACf0lEQVRYhe1WsW7bMBBVaUv22FfTNUelMZCMcZAho9myqEa7CIKMdpG2HusgH2A1QuvP7lGNbImkIUYJMukNhnWk9O7u3aMUBC1atGjR4lUQ+25kF58bUrCJ8NwZ3QNxM5JL4MxrY5gK360mrrjEOy8OBUi+acJxo+/867NTUh1ZNmzAcUp1iNSn0yFlMxqjifJrpPwa+FW/MwIe4k6j6UqRzOjHRxSZbA4vXlsRdrf7O8dDECz51oPkRpIe7NI5XmP8MUM97Fj6GenRS7GoJ+lCkKcwcq1NIEyWI/CCJdJ60IRt6kk6wI+Uu+0oIc1a1uC7WkiPK9rxvp6EQaUQ4DMHv0IKXh2KE3pqUcsSW+0UH1EuJNWh1NReeYNE11KV64TM8VgLiZJqpzjyM7Gkm8QcDjtOMDwmEoN+RaFB/o/pOr5aG1zoA1/iLri9om8/lpaw2S73NcSZTqWeJIKakfx8YS50EnoY6WJ041SoQuoxzmk8uaonCTI5DQKuzIRpuJPHnzKYFDwuLr4F+QnrcYZrPdi9fTzMtUvY2mgGSfJxfxVuyM0+opAdo7W0OyuhyCWsmmaIrFRalA5vYavmQAdKW8z0VJi7xHT8XGtdyo+GnO/bdxhMSZp9y435A8x+d6oV53YVHj75f1SIhRklqbS931aC26w6bHYah3AEMbI4CpdMy7ExN84y6t65Fwcd34PYCoYZpRgmlTyZlEb/+/uTvw7fHbEutpZLbjP529j2wZfDCTrS7qgbg1IohPD6NnkKCfW/+gafgHt8NTwFPT2cVUlW+PSyHEHwk2yGJC6HVouXJslfgoP6bc9l8fzSfSaL683fokWLFi1avBL+Aen0Z+mri0x2AAAAAElFTkSuQmCC';
 
@@ -57,8 +64,13 @@ function sendMsgCode() {
 }
 
 const fields = [
-    { name: 'phone', label: '手机号' },
-    { name: 'imgcode', label: '图形验证码' },
+    {
+        name: 'phone', label: '手机号', rules: [
+            { required: true, message: '请输入手机号' },
+            { match: /^1[3456789]\d{9}$/, message: '请输入正确的手机号' }
+        ],
+    },
+    { name: 'imgcode', label: '图形验证码', rules: [{ required: true, message: '请输入图形验证码' }] },
     {
         name: 'msgcode', label: '验证码',
         slots: {
@@ -76,18 +88,25 @@ const fields = [
 
 const formValue = reactive({});
 const formFields = [
-    { name: 'phone', label: '手机号' },
+    {
+        name: 'phone', label: '手机号', rules: [
+            { required: true, message: '请输入手机号' },
+            { match: /^1[3456789]\d{9}$/, message: '请输入正确的手机号' }
+        ],
+    },
     {
         name: 'imgcode', label: '图形验证码',
         slots: {
             append: () => h('img', { src: imgcode, width: '100px', height: '34px' })
-        }
+        },
+        rules: [{ required: true, message: '请输入图形验证码' }, { length: 4, message: '请输入正确的图形验证码' }]
     },
     {
         name: 'msgcode', label: '验证码',
         slots: {
             append: () => h(Button, { type: 'primary', onClick: sendMsgCode }, { default: () => '获取验证码' })
-        }
+        },
+        rules: [{ required: true, message: '请输入短信验证码' }, { length: 4, message: '请输入正确的短信验证码' }]
     },
 ];
 

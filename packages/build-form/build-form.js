@@ -1,6 +1,6 @@
 import { Form, Button, Space, FormItem } from "@arco-design/web-vue";
 import { h, defineComponent } from "vue";
-import { formProps, buttonProps, buildAttrs } from './use-form';
+import { formProps, buttonProps, buildAttrs, bindMethods } from './use-form';
 import BuildField from '../build-field/build-field.js';
 
 export default defineComponent({
@@ -18,6 +18,7 @@ export default defineComponent({
         // 表单属性
         const formAttrs = buildAttrs(props, formProps);
 
+        
         // 表单插槽
         function formSlots() {
             // 表单按扭
@@ -35,10 +36,29 @@ export default defineComponent({
             }
         }
 
-        return () => h(Form, { ...formAttrs, model: props.modelValue }, formSlots());
+        return () => h(Form, { ref:'formRef', ...formAttrs, model: props.modelValue }, formSlots());
+    },
+    methods: {
+        ...bindMethods(Form, 'formRef'),
+        /*
+        resetFields() {
+            this.$refs.formRef.resetFields();
+            console.log('--resetFields--')
+        }
+        */
     }
 })
-
+/*
+function bindMethods() {
+    const methods = {};
+    Object.keys(Form.methods).forEach((key) => {
+        methods[key] = function (...args) {
+            return this.$refs.formRef[key](...args);
+        }
+    })
+    return methods;
+}
+*/
 function buildBtns(props, slots) {
     // 按扭属性
     let { buttons, buttonSpace } = buildAttrs(props, buttonProps);
