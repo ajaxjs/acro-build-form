@@ -1,4 +1,4 @@
-import { h, defineComponent } from "vue";
+import { h, ref, defineComponent } from "vue";
 import { FormItem, InputNumber, InputTag, RadioGroup, CheckboxGroup, Rate, Select, Slider, Switch, Textarea, Cascader, Transfer, TimePicker, DatePicker, RangePicker, TreeSelect, Upload, ColorPicker, AutoComplete, InputSearch, InputPassword, Input } from '@arco-design/web-vue';
 import { Col } from '@arco-design/web-vue';
 import { formItemProps, colProps, buildAttrs } from '../build-form/use-form';
@@ -12,14 +12,35 @@ export default defineComponent({
     },
     emits: ['update:modelValue'],
     setup(props, { attrs, emit, slots }) {
-
+        // 密码是否可见
+        const passVisib = ref(true);
 
         return () => {
             let { inputSlots, fieldSlots } = divideSlots(slots, attrs.name);
 
-            // 输入组件
+            /***** 创建输入组件 *****/
+
+            // 输入组件插槽
             inputSlots = Object.assign({}, props.slots, inputSlots);
-            const inputItem = buildInput(props, attrs, inputSlots, emit);
+            const inputType = attrs.type || 'input';
+            const { label, noPlaceholder } = props;
+            // 输入事件
+            function onUpdate(val) {
+                emit('update:modelValue', val, { label, ...attrs })
+            }
+            const inputAttrs = { label, ...attrs, 'onUpdate:modelValue': onUpdate };
+            if (!noPlaceholder && !['range'].includes(inputType)) {
+                inputAttrs.placeholder = `请输入${label}`;
+            }
+            if (inputType == 'password') {
+                inputAttrs.visibility = passVisib.value;
+                inputAttrs.type = passVisib.value ? 'password': 'input';
+                inputAttrs.autocomplete = 'current-password';
+                inputAttrs['onUpdate:visibility'] = (val) => passVisib.value = val
+            }
+            const inputItem = h(getInputItem(inputType), inputAttrs, inputSlots);
+
+            /***** 表单项组件 *****/
 
             // 表单项插槽
             fieldSlots = { ...fieldSlots, default: () => inputItem }
@@ -39,27 +60,6 @@ export default defineComponent({
         }
     }
 });
-
-// 创建输入组件
-function buildInput(props, attrs, inputSlots, emit) {
-    const inputType = attrs.type || 'input';
-    const { label, noPlaceholder } = props;
-    // 输入事件
-    function onUpdate(val) {
-        emit('update:modelValue', val, { label, ...attrs })
-    }
-    const inputAttrs = { label, ...attrs, 'onUpdate:modelValue': onUpdate };
-    if(!noPlaceholder && !['range'].includes(inputType)) {
-        inputAttrs.placeholder = `请输入${label}`;
-    }
-    if(inputType == 'password') {
-        inputAttrs.autocomplete = 'current-password'
-    }
-
-    const inputItem = h(getInputItem(inputType), inputAttrs, inputSlots);
-
-    return inputItem;
-}
 
 // 获取对应的组件
 function getInputItem(type) {
