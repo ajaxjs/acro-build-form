@@ -3,6 +3,7 @@ module.exports = defineConfig({
   // transpileDependencies: true,
   transpileDependencies: ['@arco-design/web-vue'],
   outputDir: 'docs',
+  publicPath: './',
   pages: {
     index: {
       // page 的入口
