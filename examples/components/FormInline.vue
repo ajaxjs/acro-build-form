@@ -1,6 +1,6 @@
 <template>
     <a-card title="行内表单">
-        <a-build-form v-model="searchPrms" v-bind="formProps" span="12" />
+        <a-build-form v-model="searchPrms" v-bind="formProps" :span="12" />
     </a-card>
 </template>
 
