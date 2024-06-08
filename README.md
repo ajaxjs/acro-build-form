@@ -1,5 +1,5 @@
 # acro-build-form
-注意：本组件依赖 `@arco-design/web-vue` 版本需要升级到`2.55.2`版本以上。
+注意：本组件依赖 `@arco-design/web-vue` 版本需要升级到`2.55.2`版本以上。打包后仅`7kb`。
 
 Demo：https://ajaxjs.github.io/acro-build-form/
 

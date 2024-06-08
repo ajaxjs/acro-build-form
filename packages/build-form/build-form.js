@@ -17,7 +17,6 @@ export default defineComponent({
     setup(props, { attrs, slots }) {
         // 表单属性
         const formAttrs = buildAttrs(props, formProps);
-console.log(attrs);
         
         // 表单插槽
         function formSlots() {
