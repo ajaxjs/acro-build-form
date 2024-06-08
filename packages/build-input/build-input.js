@@ -29,7 +29,7 @@ export default defineComponent({
                 emit('update:modelValue', val, { label, ...attrs })
             }
             const inputAttrs = { label, ...attrs, 'onUpdate:modelValue': onUpdate };
-            if (!noPlaceholder && !['range'].includes(inputType)) {
+            if (!noPlaceholder && !['range'].includes(inputType) && !inputAttrs.placeholder) {
                 inputAttrs.placeholder = `请输入${label}`;
             }
             if (inputType == 'password') {

@@ -3,7 +3,7 @@
     <a-card title="a-build-input 输入" style="margin: 10px;">
         <div style="padding: 10px;">单独使用a-build-input组件：{{ titleVal }}</div>
         <a-form :model="{ titleVal }">
-            <a-build-input v-model="titleVal" label="标题" name="标题" type="password" />
+            <a-build-input v-model="titleVal" label="标题" name="标题" type="password" placeholder="自定义placeholder" />
         </a-form>
     </a-card>
 
