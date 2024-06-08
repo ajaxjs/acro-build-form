@@ -1,5 +1,4 @@
 <template>
-
     <a-card title="a-build-input 输入" style="margin: 10px;">
         <div style="padding: 10px;">单独使用a-build-input组件：{{ titleVal }}</div>
         <a-form :model="{ titleVal }">
@@ -34,12 +33,12 @@
             </a-row>
         </a-form>
     </a-card>
-
     <a-card title="a-build-form 表单" style="margin: 10px;">
         <div style="padding: 10px;">
             <div>a-build-form组件：{{ formValue }}</div>
         </div>
-        <a-build-form ref="formRef" v-model="formValue" :fields="formFields" :buttons="['立即登录', { label: '忘记密码' }]" />
+        <a-build-form ref="formRef" v-model="formValue" :fields="formFields"
+            :buttons="['立即登录', { label: '忘记密码' }]" />
 
         <a-space>
             <a-button type="outline" @click="formRef.resetFields()">触发重置表单</a-button>
@@ -107,6 +106,11 @@ const formFields = [
             append: () => h(Button, { type: 'primary', onClick: sendMsgCode }, { default: () => '获取验证码' })
         },
         rules: [{ required: true, message: '请输入短信验证码' }, { length: 4, message: '请输入正确的短信验证码' }]
+    },
+    {
+        name: 'rememberPassword',
+        type: 'switch',
+        text: '记住密码',
     },
 ];
 

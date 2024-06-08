@@ -16,9 +16,11 @@ import BuildForm from 'acro-build-form';
 app.use(BuildForm);
 ```
 
-# a-build-input 参数
+# a-build-input 输入框
 
 更多参数，请参数type对应组件的官方说明：https://arco.design/vue/component/input
+
+### 参数
 
 | 参数          | 类型    | 说明                                                         |
 | ------------- | ------- | ------------------------------------------------------------ |
@@ -27,6 +29,15 @@ app.use(BuildForm);
 | slots         | object  | 输入框插槽,请参考各自组件的说明文档。                        |
 | options       | array   | `radio`，`checkbox`，等组件专用属性，格式为：['value']或[{label:'名称',value:'值'}] |
 | noPlaceholder | boolean | 隐藏默认placeholder                                          |
+
+
+### Slots 插槽
+
+| 插槽         | 说明       |
+| ------------ | ---------- |
+| before-input | 输入框之前 |
+| after-input  | 输入框之后 |
+|              |            |
 
 ```vue
 <template>
@@ -50,11 +61,14 @@ app.use(BuildForm);
 
 # a-build-fleld 表单项
 
+### Props 参数
+
 | 参数    | 类型   | 说明                                            |
 | ------- | ------ | ----------------------------------------------- |
 | v-model | object | 表单值，受控                                    |
 | fields  | array  | 表单项，继承`a-build-input`组件及子组件所有参数 |
 |         |        |                                                 |
+
 
 ```vue
 <template>
@@ -109,7 +123,7 @@ app.use(BuildForm);
 
 
 
-# a-build-form 参数
+# a-build-form 表单
 
 `a-build-form`组件，完全继承`a-build-field`组件的所有参数，外加表单参数：https://arco.design/vue/component/form#API
 
@@ -117,6 +131,14 @@ app.use(BuildForm);
 | ----------- | ------ | ------------------------------------------------------------ |
 | buttons     | array  | 表单按扭，默认第一个按扭为submit                             |
 | buttonSpace | object | 按扭间距，参考space组件参数：https://arco.design/vue/component/space |
+
+### Slots 插槽
+
+| 插槽         | 说明                           |
+| ------------ | ------------------------------ |
+| form-prepend | 表单项之前，可用于添加额外字段 |
+| form-append  | 表单项之后（按扭之前）         |
+| default      | 按扭之后                       |
 
 ```vue
 <template>

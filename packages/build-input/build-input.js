@@ -16,39 +16,55 @@ export default defineComponent({
         const passVisib = ref(true);
 
         return () => {
+            // 区分插槽
             let { inputSlots, fieldSlots } = divideSlots(slots, attrs.name);
 
             /***** 创建输入组件 *****/
-
+            const { label, noPlaceholder } = props;
+            const inputType = attrs.type || 'input';
+            const inputAttrs = { label, ...attrs, 'onUpdate:modelValue': onUpdate };
+            // 输入框
+            let inputItem = h(getInputItem(inputType), inputAttrs, inputSlots);
+            // 输入框前后插槽
+            let {beforeInput, afterInput} = inputSlots;
             // 输入组件插槽
             inputSlots = Object.assign({}, props.slots, inputSlots);
-            const inputType = attrs.type || 'input';
-            const { label, noPlaceholder } = props;
             // 输入事件
             function onUpdate(val) {
                 emit('update:modelValue', val, { label, ...attrs })
             }
-            const inputAttrs = { label, ...attrs, 'onUpdate:modelValue': onUpdate };
             if (!noPlaceholder && !['range'].includes(inputType) && !inputAttrs.placeholder) {
                 inputAttrs.placeholder = `请输入${label}`;
             }
+            // 输入框参数完善
             if (inputType == 'password') {
                 inputAttrs.visibility = passVisib.value;
-                inputAttrs.type = passVisib.value ? 'password': 'input';
+                inputAttrs.type = passVisib.value ? 'password' : 'input';
                 inputAttrs.autocomplete = 'current-password';
                 inputAttrs['onUpdate:visibility'] = (val) => passVisib.value = val
+            } else if (inputType === 'switch') {
+                inputItem = h('label', null, [
+                    inputItem,
+                    h('span', null, ' '+inputAttrs.text)
+                ])
             }
-            const inputItem = h(getInputItem(inputType), inputAttrs, inputSlots);
 
             /***** 表单项组件 *****/
 
             // 表单项插槽
-            fieldSlots = { ...fieldSlots, default: () => inputItem }
+            fieldSlots = {
+                ...fieldSlots, default: () => [
+                    beforeInput ? beforeInput() : null,
+                    inputItem,
+                    afterInput ? afterInput() : null
+                ]
+            }
 
             // 表单项属性
             const fieldAttrs = Object.assign({
                 field: attrs.name
             }, buildAttrs(props, formItemProps));
+            
             // form-item
             const formItem = h(FormItem, fieldAttrs, fieldSlots);
 
