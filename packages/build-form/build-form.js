@@ -39,25 +39,9 @@ export default defineComponent({
     },
     methods: {
         ...bindMethods(Form, 'formRef'),
-        /*
-        resetFields() {
-            this.$refs.formRef.resetFields();
-            console.log('--resetFields--')
-        }
-        */
     }
 })
-/*
-function bindMethods() {
-    const methods = {};
-    Object.keys(Form.methods).forEach((key) => {
-        methods[key] = function (...args) {
-            return this.$refs.formRef[key](...args);
-        }
-    })
-    return methods;
-}
-*/
+
 function buildBtns(props, slots) {
     // 按扭属性
     let { buttons, buttonSpace } = buildAttrs(props, buttonProps);

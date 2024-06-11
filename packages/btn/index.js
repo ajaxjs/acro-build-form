@@ -1,7 +1,6 @@
-import ABtn from "./a-btn.vue";
+import ABtn from "./a-btn.js";
 
 ABtn.install = function (Vue) {
-    console.log(ABtn.name)
     Vue.component(ABtn.name, ABtn);
 };
 

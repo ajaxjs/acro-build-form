@@ -43,10 +43,9 @@ export default defineComponent({
                 inputAttrs.autocomplete = 'current-password';
                 inputAttrs['onUpdate:visibility'] = (val) => passVisib.value = val
             } else if (inputType === 'switch') {
-                inputItem = h('label', null, [
-                    inputItem,
-                    h('span', null, ' '+inputAttrs.text)
-                ])
+                if(inputAttrs.text){
+                    inputItem = h('label', null, [inputItem,h('span', null, ' '+inputAttrs.text)])
+                }
             }
 
             /***** 表单项组件 *****/
