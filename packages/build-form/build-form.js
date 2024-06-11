@@ -17,25 +17,31 @@ export default defineComponent({
     setup(props, { attrs, slots }) {
         // 表单属性
         const formAttrs = buildAttrs(props, formProps);
-        
+
         // 表单插槽
         function formSlots() {
             // 表单按扭
             const buttons = slots.buttons ? slots.buttons : buildBtns(props, slots);
+            // 解构插槽
+            const {
+                default: defaultSlot,
+                'form-prepend': formPrepend,
+                'form-append': formAppend,
+                ...fieldSlots
+            } = slots;
 
             return {
-                ...slots,
                 default: () => [
-                    slots.formPrepend ? slots.prepend() : null,
-                    h(BuildField, { ...attrs, fields: props.fields, modelValue: props.modelValue }, slots),
-                    slots.formAppend ? slots.append() : null,
+                    formPrepend ? formPrepend() : null,
+                    h(BuildField, { ...attrs, fields: props.fields, modelValue: props.modelValue }, fieldSlots),
+                    formAppend ? formAppend() : null,
                     buttons,
                     slots.default ? slots.default() : null
                 ]
             }
         }
 
-        return () => h(Form, { ref:'formRef', ...formAttrs, model: props.modelValue }, formSlots());
+        return () => h(Form, { ref: 'formRef', ...formAttrs, model: props.modelValue }, formSlots());
     },
     methods: {
         ...bindMethods(Form, 'formRef'),
@@ -45,7 +51,7 @@ export default defineComponent({
 function buildBtns(props, slots) {
     // 按扭属性
     let { buttons, buttonSpace } = buildAttrs(props, buttonProps);
-    if(!buttons || !Array.isArray(buttons)){
+    if (!buttons || !Array.isArray(buttons)) {
         return null;
     }
 

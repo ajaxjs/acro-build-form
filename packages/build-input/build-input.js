@@ -128,10 +128,12 @@ function divideSlots(slots, name) {
     Object.keys(slots).forEach(key => {
         const slot = slots[key];
         const item = key.match(/(\w+)-(.+)-(.+)/i);
-        if (item[1] == 'input' && item[2] == name) {
-            inputSlots[item[3]] = slot
-        } else if (item[1] == 'field' && item[2] == name) {
-            fieldSlots[item[3]] = slot
+        if(item){
+            if (item[1] == 'input' && item[2] == name) {
+                inputSlots[item[3]] = slot
+            } else if (item[1] == 'field' && item[2] == name) {
+                fieldSlots[item[3]] = slot
+            }
         }
     })
     return { inputSlots, fieldSlots }

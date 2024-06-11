@@ -5,7 +5,7 @@
             <a-build-input v-model="titleVal" label="标题" name="标题" type="password" placeholder="自定义placeholder" />
 
         </a-form>
-        
+
     </a-card>
 
     <a-card title="a-build-field 字段" style="margin: 10px;">
@@ -39,7 +39,7 @@
         <div style="padding: 10px;">
             <div>a-build-form组件：{{ formValue }}</div>
         </div>
-        <a-build-form ref="formRef" v-model="formValue" :fields="formFields" :buttons="['立即登录', { label: '忘记密码' }]" />
+        <a-build-form ref="formRef" v-model="formValue" :fields="formFields" :buttons="['立即登录', { label: '忘记密码' }]"></a-build-form>
 
         <a-space>
             <a-button type="outline" @click="formRef.resetFields()">触发重置表单</a-button>
