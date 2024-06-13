@@ -4,7 +4,7 @@ import { Divider } from "@arco-design/web-vue";
 import BuildInput from '../build-input/build-input.js';
 
 export default defineComponent({
-    name: "a-build-field",
+    name: "acro-build-field",
     props: {
         modelValue: Object,
         fields: {

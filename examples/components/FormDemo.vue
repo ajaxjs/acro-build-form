@@ -1,12 +1,12 @@
 <template>
-    <a-card title="a-build-form 表单演示">
+    <a-card title="acro-build-form 表单演示">
         <a-space>
             <a-btn label="外部设置值1" type="outline" @click="prms.password = '123456'" />
             <a-btn label="外部设置值2" type="outline" @click="prms.password = '123'" />
         </a-space>
         <div style="padding: 10px 0;">{{ prms }}</div>
         <a-card>
-            <a-build-form v-model="prms" :fields="fields" :buttons="['立即提交', { label: '重置', onClick: onReset }]" />
+            <acro-build-form v-model="prms" :fields="fields" :buttons="['立即提交', { label: '重置', onClick: onReset }]" />
         </a-card>
     </a-card>
 </template>

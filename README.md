@@ -18,7 +18,7 @@ import BuildForm from 'acro-build-form';
 app.use(BuildForm);
 ```
 
-# a-build-input 输入框
+# acro-build-input 输入框
 
 更多参数，请参数type对应组件的官方说明：https://arco.design/vue/component/input
 
@@ -33,21 +33,14 @@ app.use(BuildForm);
 | noPlaceholder | boolean | 隐藏默认placeholder                                          |
 
 
-### Slots 插槽
-
-| 插槽         | 说明       |
-| ------------ | ---------- |
-| before-input | 输入框之前 |
-| after-input  | 输入框之后 |
-|              |            |
 
 ```vue
 <template>
 	<a-form>
         <!--默认Input-->
-        <a-build-input v-model="title" label="标题" />
+        <acro-build-input v-model="title" label="标题" />
         <!--Radio-->
-        <a-build-input v-model="color" label="标题" type="radio" :options="['red','blue','orange']" />
+        <acro-build-input v-model="color" label="标题" type="radio" :options="['red','blue','orange']" />
     </a-form>
 </template>
 
@@ -61,21 +54,21 @@ app.use(BuildForm);
 
 
 
-# a-build-fleld 表单项
+# acro-build-fleld 表单项
 
 ### Props 参数
 
 | 参数    | 类型   | 说明                                            |
 | ------- | ------ | ----------------------------------------------- |
 | v-model | object | 表单值，受控                                    |
-| fields  | array  | 表单项，继承`a-build-input`组件及子组件所有参数 |
+| fields  | array  | 表单项，继承`acro-build-input`组件及子组件所有参数 |
 |         |        |                                                 |
 
 
 ```vue
 <template>
 	<a-form :model="">
-        <q-build-field v-model="params" :fields="formField">
+        <acro-build-field v-model="params" :fields="formField">
             
             <!-- 字段插槽 input-[字段name]-[插槽类型] -->
             <template #input-imgcode-append>
@@ -87,7 +80,7 @@ app.use(BuildForm);
             <span>-帮助信息插槽-</span>
             </template>
 
-    	</q-build-field>
+    	</acro-build-field>
     </a-form>
 </template>
 
@@ -125,9 +118,9 @@ app.use(BuildForm);
 
 
 
-# a-build-form 表单
+# acro-build-form 表单
 
-`a-build-form`组件，完全继承`a-build-field`组件的所有参数，外加表单参数：https://arco.design/vue/component/form#API
+`acro-build-form`组件，完全继承`acro-build-field`组件的所有参数，外加表单参数：https://arco.design/vue/component/form#API
 
 | 参数        | 类型   | 说明                                                         |
 | ----------- | ------ | ------------------------------------------------------------ |
@@ -145,10 +138,10 @@ app.use(BuildForm);
 ```vue
 <template>
 	<!-- 默认使用 -->
-	<a-build-form v-model="params" :fields="formField" />
+	<acro-build-form v-model="params" :fields="formField" />
 
 	<!-- 可设置表单组件相关参数 -->
-	<a-build-form v-model="params" :fields="formField" layout="vertical" />
+	<acro-build-form v-model="params" :fields="formField" layout="vertical" />
 </template>
 
 <script setup>
@@ -218,7 +211,7 @@ const IconFont = Icon.addFromIconFontCn({ src: '//at.alicdn.com/t/font_180975_ue
     <div class="wrapper">
         {{ prms }}
         <a-card class="q-mx-md" style="max-width: 640px;margin:auto">
-            <a-build-form v-model="prms" :fields="fields" :buttons="['立即提交',{label:'重置',htmlType:'reset'}]" />
+            <acro-build-form v-model="prms" :fields="fields" :buttons="['立即提交',{label:'重置',htmlType:'reset'}]" />
         </a-card>
     </div>
 </template>

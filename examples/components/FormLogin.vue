@@ -1,24 +1,24 @@
 <template>
-    <a-card title="a-build-input 输入" style="margin: 10px;">
-        <div style="padding: 10px;">单独使用a-build-input组件：{{ titleVal }}</div>
+    <a-card title="acro-build-input 输入" style="margin: 10px;">
+        <div style="padding: 10px;">单独使用acro-build-input组件：{{ titleVal }}</div>
         <a-form :model="{ titleVal }">
-            <a-build-input v-model="titleVal" label="标题" name="标题" type="password" placeholder="自定义placeholder" />
+            <acro-build-input v-model="titleVal" label="标题" name="标题" type="password" placeholder="自定义placeholder" />
 
         </a-form>
 
     </a-card>
 
-    <a-card title="a-build-field 字段" style="margin: 10px;">
+    <a-card title="acro-build-form 字段" style="margin: 10px;">
         <div style="padding: 10px;">
-            <div>需自行嵌套a-build-form，如表单项中带有栅格参数，外屋需要a-row</div>
-            <div>a-build-field组件：{{ prms }}</div>
+            <div>需自行嵌套acro-build-form，如表单项中带有栅格参数，外屋需要a-row</div>
+            <div>acro-build-form组件：{{ prms }}</div>
         </div>
 
         <a-form :model="prms">
             <!-- 直接使用build-field，外层需要a-form, 否则会报warn-->
             <a-row>
                 <!-- build-field的fields表单项中带有栅格参数，外屋需要a-row -->
-                <a-build-field v-model="prms" :fields="fields" row-class="test-xxx">
+                <acro-build-form v-model="prms" :fields="fields" row-class="test-xxx">
 
                     <!-- 字段插槽 input-[字段name]-[插槽类型] -->
                     <template #input-imgcode-append>
@@ -30,16 +30,16 @@
                         <span>-帮助信息插槽-</span>
                     </template>
 
-                </a-build-field>
+                </acro-build-form>
                 <a-button html-type="submit" type="primary">提交</a-button>
             </a-row>
         </a-form>
     </a-card>
-    <a-card title="a-build-form 表单" style="margin: 10px;">
+    <a-card title="acro-build-form 表单" style="margin: 10px;">
         <div style="padding: 10px;">
-            <div>a-build-form组件：{{ formValue }}</div>
+            <div>acro-build-form组件：{{ formValue }}</div>
         </div>
-        <a-build-form ref="formRef" v-model="formValue" :fields="formFields" :buttons="['立即登录', { label: '忘记密码' }]"></a-build-form>
+        <acro-build-form ref="formRef" v-model="formValue" :fields="formFields" :buttons="['立即登录', { label: '忘记密码' }]"></acro-build-form>
 
         <a-space>
             <a-button type="outline" @click="formRef.resetFields()">触发重置表单</a-button>

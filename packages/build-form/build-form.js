@@ -4,7 +4,7 @@ import { formProps, buttonProps, buildAttrs, bindMethods } from './use-form';
 import BuildField from '../build-field/build-field.js';
 
 export default defineComponent({
-    name: "a-build-form",
+    name: "acro-build-form",
     props: {
         modelValue: Object,
         // 字段列表

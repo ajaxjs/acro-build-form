@@ -4,7 +4,7 @@ import { Col } from '@arco-design/web-vue';
 import { formItemProps, colProps, buildAttrs } from '../build-form/use-form';
 
 export default defineComponent({
-    name: "a-build-input",
+    name: "acro-build-input",
     props: {
         slots: Object,
         noPlaceholder: Boolean,
